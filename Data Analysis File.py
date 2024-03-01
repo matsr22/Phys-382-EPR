@@ -29,6 +29,8 @@ FreqResonances = np.array([])
 
 for i, sheet in enumerate(data):
 
+
+        print(sheet)
         timeData = (data[sheet]["Time"]).to_numpy()
         EPRData = (data[sheet]["EPR signal"]).to_numpy()
         MagneticData = (data[sheet]["Magnetic Signal"]).to_numpy()

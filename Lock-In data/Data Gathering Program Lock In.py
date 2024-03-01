@@ -65,7 +65,7 @@ print(scope.query)
 
 runType = input("If this is a testing run enter t, if data collection enter d")
 initalCurrent = 0
-stopCurrent = 1.5
+stopCurrent = 1
 maxVolts = 25
 
 if(runType == 't'):
@@ -73,13 +73,13 @@ if(runType == 't'):
   currentThresh1 = currentThresh2 = currentThresh3 = currentThresh4 = initalCurrent-0.01
 
 if(runType == 'd'):
-  currentStep1 = 0.01
+  currentStep1 = 0.02
   currentStep2 = 0.005
   currentStep3 = 0.001
-  currentThresh1 = 0.9600000000000002
-  currentThresh2 = 1.0500000000000003
-  currentThresh3 = 1.1100000000000003
-  currentThresh4 = 1.2000000000000004
+  currentThresh1 = 0.2950000000000001
+  currentThresh2 = 0.37000000000000016
+  currentThresh3 = 0.4200000000000002
+  currentThresh4 = 0.5210000000000001
 
 
 # Setting the inital vals on the current source
@@ -91,6 +91,7 @@ currentStep = currentStep1
 currentCurrent = initalCurrent
 
 print("CURR "+str(initalCurrent)+"A")
+currentSource.write("OUTPUT:STATE ON")
 currentSource.write("CURR "+str(initalCurrent)+"A")
 currentSource.write("VOLT "+str(maxVolts)+"V")
 
@@ -170,12 +171,12 @@ while (currentCurrent<stopCurrent):
   currentCurrent+=currentStep
   currentSource.write("CURR "+str(currentCurrent)+"A")
 
-  time.sleep(total_time*1.5)
+  time.sleep(total_time*0.4)
 
-
+scope.write('data:start 1')
 rawData = {'MagField':graphDataX,'Amplitude':graphDataY}
 df = pd.DataFrame(rawData)
-path = r"C:\Users\matth\Documents\Phys 382\Lock-In data\EPR Lock-In Data.xlsx"
+path = r"C:\Users\matth\Documents\Phys 382\Lock-In data\EPR Lock-In Data - Vary Amp Freq.xlsx"
 with pd.ExcelWriter(path,mode='a') as writer:
   df.to_excel(writer, sheet_name=(runFrequency))
 
@@ -188,8 +189,8 @@ minMaxRange = minLoc - maxLoc
 
 centre = ((minMaxRange)/2) + maxLoc # Resonance magnetic location
 point1 = maxLoc - minMaxRange*1.5 
-point2 = maxLoc
-point3 = minLoc
+point2 = maxLoc - minMaxRange*0.2 
+point3 = minLoc+minMaxRange*0.2 
 point4 = minLoc + minMaxRange*1.5 
 
 
@@ -200,7 +201,7 @@ print("Point 3: {}".format(point3))
 print("Point 4: {}".format(point4))
 
 
-plt.scatter(graphDataX,graphDataY)
+plt.scatter(graphDataX,graphDataY,s=8)
 plt.xlabel("Magnetic Field (mT)")
 plt.ylabel("Signal")#
 plt.title("Frequency: "+ str(runFrequency))
