@@ -61,7 +61,6 @@ currentSource.write_termination = None
 currentSource.write('*cls') # clear ESR
 
 print(scope.query('*idn?')) # Identify oscillsicope model
-print(scope.query)
 
 runType = input("If this is a testing run enter t, if data collection enter d")
 initalCurrent = 0
@@ -129,10 +128,10 @@ while (currentCurrent<stopCurrent):
   scope.write('acquire:state 1') # run
 
   # acq config
-  t5 = time.perf_counter()
-  r = scope.query('*opc?') # sync
-  t6 = time.perf_counter()
-  print('acquire time: {} s'.format(t6 - t5))
+  #t5 = time.perf_counter()
+  #r = scope.query('*opc?') # sync
+  #t6 = time.perf_counter()
+  #print('acquire time: {} s'.format(t6 - t5))
 
   # data query
   bin_wave1 = scope.query_binary_values('curve?', datatype='b', container=np.array)

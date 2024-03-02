@@ -25,6 +25,9 @@ data = pd.read_excel(r"C:\Users\matth\Documents\Phys 382\Lock-In data\EPR Lock-I
 MagResonances = []
 FreqResonances = []
 
+def guassDerivative(x,a,b,c): # Where a is the height of a guass peak, b is the centre position and c is the s.d.
+      return (a*(x-b)*math.pow(math.e,(-(math.pow((b-x),2))/(2*math.pow(c,2)))))/math.pow(c,2)
+      
 
 
 for i, sheet in enumerate(data):
@@ -35,9 +38,9 @@ for i, sheet in enumerate(data):
             AmpData = (data[sheet]["Amplitude"]).to_numpy()
             MagneticData = (data[sheet]["MagField"]).to_numpy()   
 
-            maxLoc = np.argmax(AmpData)
-            minLoc = np.argmin(AmpData)
-            MagResonances.append((minLoc-maxLoc)/2 + maxLoc)
+            maxLoc = MagneticData[np.argmax(AmpData)]
+            minLoc = MagneticData[np.argmin(AmpData)]
+            MagResonances.append(((minLoc-maxLoc)/2 + maxLoc))
             FreqResonances.append(float(sheet))
 
 
