@@ -1,0 +1,7 @@
+The following parameters of the graph are obtained:
+
+Graph amplitude: 5.791985859639541
+Graph x loc: 1.222053429999554
+Graph Stand Dev/width: 0.40725269806316206
+Y offset: 6.286064340203552
+Fit used: lorentzDerivative
