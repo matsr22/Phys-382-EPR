@@ -1,0 +1,7 @@
+The following parameters of the graph are obtained:
+
+Gradient 1.3100573079389923
+Grad Uncertainty: 0.019761924657269406
+Y Intercept: 6.881365991659123
+Intercept Uncertainty: 0.9263947407961362
+R^2 value: 0.9972768293038988
